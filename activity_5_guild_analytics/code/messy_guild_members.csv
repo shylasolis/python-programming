@@ -1,0 +1,22 @@
+name,char_class,level,hp,region
+Aria,wizard,5,42,North
+Brom,Warrior, 7 ,68,South
+Cora,ROGUE,4,,East
+Dane,Cleric,6,50,West
+Elin,Wizard,8,55,North
+Finn,rogue,3,30,South
+Greta,Warrior,9,,East
+Hilde,cleric,5,45,West
+Ivo,Wizard,N/A,48,North
+Jora,Warrior,4,40,South
+Kael,Rogue,7,52,East
+Lira,Cleric,8,60,West
+Milo,wizard,3,28,North
+Nyra,Warrior,6,58,South
+Orin,Rogue,5,38,East
+Petra,Cleric,4,36,West
+Quinn,Wizard,9,62,North
+Rask,warrior, 5,47,South
+Sela,Rogue,6,44,East
+Torin,Cleric,7,54,West
+Torin,Cleric,7,54,West

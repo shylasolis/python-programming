@@ -1,2 +1,5 @@
 # Keep instructor-only materials out of the public repository.
-instructor/
+*Instructor*
+*solution*
+*key*
+*answer*
