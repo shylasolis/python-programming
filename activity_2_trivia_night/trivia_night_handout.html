@@ -108,7 +108,10 @@ print(typed_second.strip().lower() == correct_answer.strip().lower())  # True</p
 <p>For the Mars question, the same comparison pattern also accepts <code>" MARS "</code> when the stored answer is <code>"Mars"</code>. Clean both the player's answer and the stored answer when comparing. Keep the question-bank data unchanged.</p>
 
 <h2>4. Input Errors: Blank Text Is Not an Exception</h2>
-<p>An <strong>exception</strong> is an error condition Python raises while a program runs. <code>try</code> runs code that might raise an exception; <code>except</code> handles a particular exception so the program can respond instead of stopping abruptly.</p>
+<p>A <strong>run-time error</strong> is a problem that happens after Python has started running your program. For example, asking Python to divide by zero raises an exception while the program runs. If that exception is not handled, Python prints an error message and stops the program. A <strong>syntax error</strong> is different: it means Python cannot understand how the code is written, so it cannot start running that code.</p>
+<pre># Run-time error: Python cannot divide a number by zero
+result = 10 / 0</pre>
+<p>An <strong>exception</strong> is the signal Python raises for a run-time problem. <code>try</code> runs code that might raise an exception; <code>except</code> handles a particular exception so the program can respond instead of stopping abruptly. Handling an exception does not mean the problem never happened; it means your code chose what to do about it.</p>
 <div class="callout"><strong>Important:</strong> pressing Enter without typing returns an empty string. That is valid input, not an exception, so check it with <code>if</code>. If the input stream closes, <code>input()</code> raises <code>EOFError</code>, which can be handled with <code>try</code>/<code>except</code>.</div>
 <p>Example 1: pressing Enter produces blank text. An <code>if</code> check handles that ordinary input:</p>
 <pre>answer = input("Your answer: ")
@@ -165,7 +168,16 @@ print(f"{player}, your score is {score}.")</pre>
 <p>If something goes wrong, read the full error message from the bottom upward. Check spelling, quotation marks, parentheses, indentation, and dictionary keys. Test one question or input case at a time.</p>
 
 <h2>Stretch Goals</h2>
-<ul><li>Store fixed multiple-choice options as a tuple, for example <code>options = ("A", "B", "C")</code>.</li><li>Let the player choose a category and play only matching questions. A <strong>filter</strong> selects items that meet a condition.</li><li>Use <code>datetime.now()</code> to timestamp the score. <code>datetime</code> is Python's standard module for dates and times; the starter already imports it.</li></ul>
+<ul><li>Store fixed multiple-choice options as a tuple, for example <code>options = ("A", "B", "C")</code>.</li><li>Let the player choose a category and play only matching questions. A <strong>filter</strong> selects items that meet a condition.</li></ul>
+<h3>Optional Date and Time: Timestamp the Score</h3>
+<p>A <strong>timestamp</strong> is a date and time recorded for an event. Python's <code>datetime</code> tools can get the current date and time from the computer's clock. The starter already has <code>from datetime import datetime</code> at the top, so you do not need to add another import.</p>
+<pre>finished_at = datetime.now()
+print(f"Game finished at: {finished_at}")</pre>
+<p><code>datetime.now()</code> gives you a date-and-time value. Printing it directly includes seconds and may include extra precision. To choose a shorter display, use <code>strftime()</code>, which formats the value as text. In these format codes, <code>%Y</code> means four-digit year, <code>%m</code> month, <code>%d</code> day, <code>%H</code> hour (24-hour clock), and <code>%M</code> minute.</p>
+<pre>finished_at = datetime.now()
+timestamp = finished_at.strftime("%Y-%m-%d %H:%M")
+print(f"Game finished at: {timestamp}")</pre>
+<p>The displayed time comes from the computer running the game, so it depends on that computer's clock and time zone. This feature is optional; finish and test the main trivia game first.</p>
 
 <h2>Quick Vocabulary Review</h2>
 <table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody>
@@ -173,10 +185,11 @@ print(f"{player}, your score is {score}.")</pre>
 <tr><td>Parameter / return value</td><td>Information passed into a function / result sent back to its caller.</td></tr>
 <tr><td>List / dictionary / tuple</td><td>Ordered changeable collection / key-value collection / ordered unchangeable collection.</td></tr>
 <tr><td>Boolean</td><td>One of two values: <code>True</code> or <code>False</code>.</td></tr>
-<tr><td>Exception</td><td>A runtime error condition Python raises.</td></tr>
+<tr><td>Run-time error</td><td>A problem that happens while the program is running; an unhandled exception can make the program stop.</td></tr>
+<tr><td>Exception</td><td>A signal Python raises for a problem during execution; <code>try</code>/<code>except</code> can handle it.</td></tr>
 <tr><td>String method</td><td>An operation on text, such as <code>.strip()</code> or <code>.lower()</code>.</td></tr>
 <tr><td>f-string</td><td>A string that can include values inside braces, such as <code>f"Score: {score}"</code>.</td></tr>
-<tr><td><code>datetime</code></td><td>Python's standard module for dates and times.</td></tr>
+<tr><td><code>datetime</code></td><td>Python's date/time tools; <code>datetime.now()</code> gets the current date and time.</td></tr>
 </tbody></table>
 </body>
 </html>

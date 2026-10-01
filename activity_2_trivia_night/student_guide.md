@@ -28,10 +28,33 @@ A console trivia game that:
 - **TODO 2–3:** Write the `ask_question(question)` function. It should print the question, get the
   player's input, compare it (case-insensitively, with extra whitespace stripped) to the correct answer,
   and return `True` or `False`.
-- **TODO 4:** Wrap the input call in a `try`/`except` block so a blank answer or unexpected input doesn't
-  crash the program.
+- **TODO 4:** Check for a blank answer with an `if` statement, and use `try`/`except` to handle an input
+  exception such as `EOFError` without crashing the program.
 - **TODO 5:** Write the main game loop: use a `for` loop over `QUESTIONS`, call `ask_question()` for
   each one, keep a running score, and print the final score with an f-string.
+
+## Run-Time Errors and Exceptions
+
+A **run-time error** is a problem that happens after Python has started running your program. For example, dividing by zero raises an exception while the program runs:
+
+```python
+result = 10 / 0  # raises ZeroDivisionError when this line runs
+```
+
+A **syntax error** is different: Python cannot understand how the code is written, so that code cannot start running. An **exception** is a signal Python raises for a problem during execution. If an exception is not handled, the program usually stops and Python displays an error message. `try` and `except` let your program handle a specific exception and decide what to do next.
+
+Blank input is not an exception. Pressing Enter without typing gives `input()` an empty string, so check it with `if`. When the input stream closes, `input()` raises `EOFError`, which you can handle with `try`/`except`. An unanswered question should not earn a point.
+
+```python
+try:
+  answer = input("Your answer: ")
+except EOFError:
+  print("No input received. This answer will count as incorrect.")
+  answer = ""
+
+if answer.strip() == "":
+  print("A blank answer will count as incorrect.")
+```
 
 ## Using AI the Right Way
 
@@ -56,6 +79,16 @@ functions and `try`/`except` yourself.
 - Let the player pick a category before playing (filter the list).
 - Use `datetime.now()` to print a timestamp with the final score.
 
+`datetime` is Python's standard date-and-time tool. The starter already imports `datetime` for you. `datetime.now()` gets the current date and time from the computer's clock. To make a shorter timestamp, use `strftime()` to format it as text:
+
+```python
+finished_at = datetime.now()
+timestamp = finished_at.strftime("%Y-%m-%d %H:%M")
+print(f"Game finished at: {timestamp}")
+```
+
+In this format, `%Y` is the four-digit year, `%m` the month, `%d` the day, `%H` the hour on a 24-hour clock, and `%M` the minute. The time depends on the computer's clock and time zone. This is optional; finish the main game first.
+
 ## Vocabulary Recap
 
 | Term | Meaning |
@@ -64,6 +97,8 @@ functions and `try`/`except` yourself.
 | List | An ordered, changeable collection (`[]`) |
 | Dictionary | A collection of key/value pairs (`{}`) |
 | Tuple | An ordered, unchangeable collection (`()`) |
-| `try` / `except` | Handles bad input without crashing the program |
+| Run-time error | A problem that happens while a program is running |
+| Exception | A signal Python raises for a problem during execution; `try` / `except` can handle it |
+| `try` / `except` | Runs code that might raise an exception and handles a specific exception |
 | String method | A built-in function for text, like `.strip()` or `.lower()` |
-| `datetime` | A module for working with dates and times |
+| `datetime` | Python's date-and-time tools; `datetime.now()` gets the current date and time |
