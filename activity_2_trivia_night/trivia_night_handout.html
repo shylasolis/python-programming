@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trivia Night | Student Handout</title>
+<style>
+  :root { color: #202a32; background: #fff; font: 11pt/1.48 Georgia, "Times New Roman", serif; }
+  * { box-sizing: border-box; }
+  body { max-width: 8in; margin: 0 auto; padding: 0.55in 0.68in; }
+  h1, h2, h3, .sans { font-family: "Trebuchet MS", Arial, sans-serif; }
+  h1 { margin: 0; color: #173b4a; font-size: 28pt; line-height: 1.05; }
+  h2 { margin: 24px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #a8bdc2; color: #17636a; font-size: 16pt; page-break-after: avoid; }
+  h3 { margin: 15px 0 5px; color: #254c58; font-size: 12pt; page-break-after: avoid; }
+  p { margin: 6px 0 9px; }
+  ul, ol { margin: 5px 0 10px; padding-left: 23px; }
+  li { margin: 3px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-size: 10pt; }
+  th, td { border: 1px solid #b6c5c8; padding: 5px 7px; text-align: left; vertical-align: top; }
+  th { background: #e8f0ef; font-family: "Trebuchet MS", Arial, sans-serif; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 8px 0 12px; padding: 9px 11px; border-left: 3px solid #df9a45; background: #f3f6f5; font: 9.5pt/1.4 Consolas, "Courier New", monospace; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: .94em; }
+  .eyebrow { margin: 6px 0 22px; color: #537077; font: bold 9pt "Trebuchet MS", Arial, sans-serif; text-transform: uppercase; }
+  .callout { padding: 9px 12px; border: 1px solid #b6c5c8; background: #f5f8f7; }
+  .titleblock { padding: 0 0 14px; border-bottom: 3px solid #df9a45; }
+  .small { font-size: 9.5pt; }
+  @page { size: letter; margin: 0.55in 0.65in; }
+  @media print {
+    :root { font-size: 10.5pt; }
+    body { max-width: none; margin: 0; padding: 0; }
+    h2 { page-break-after: avoid; }
+    pre, table, .callout { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+<header class="titleblock">
+  <h1>Trivia Night</h1>
+  <p class="eyebrow">Student handout · Activity 2 · Python programming</p>
+  <p><strong>Your mission:</strong> Build a console trivia game that asks questions, checks answers, keeps score, and responds politely when input is missing. Use AI to help create and review trivia content; write and understand the Python that runs the game.</p>
+</header>
+
+<h2>Textbook Connection</h2>
+<p><strong>Course textbook:</strong> <em>Murach’s Python Programming</em>, Section 2, Parts A and B. The course materials align this activity with syllabus Weeks 4–5. Part A covers functions, lists, tuples, and exceptions; Part B covers dictionaries, strings, and dates/times.</p>
+<p class="small">The course materials identify this reading by section and part, not by numbered chapter. Chapter numbering can differ by edition, so use the table of contents in your assigned edition to locate Section 2, Parts A and B.</p>
+
+<h2>What You Will Practice</h2>
+<ul>
+  <li>Organize related information using lists and dictionaries.</li>
+  <li>Write and call a function that accepts information and returns a result.</li>
+  <li>Repeat work with a <code>for</code> loop and track a running score.</li>
+  <li>Clean text with string methods before comparing answers.</li>
+  <li>Handle blank answers and end-of-input without an unfriendly crash.</li>
+  <li>Ask AI for structured content, verify it, and use AI as a learning partner.</li>
+</ul>
+
+<h2>1. Store Questions as Data</h2>
+<p>A dictionary stores details about one question. A list stores multiple questions, so the same game logic can work with every item in the question bank. Here are two question dictionaries inside one list:</p>
+<pre>questions = [
+  {
+    "question": "What is the capital of Japan?",
+    "answer": "Tokyo",
+    "category": "Geography",
+  },
+  {
+    "question": "Which planet is known as the Red Planet?",
+    "answer": "Mars",
+    "category": "Space",
+  },
+]</pre>
+<p>Each set of braces is one dictionary, and the comma separates the two dictionaries in the list. The labels such as <code>"question"</code> and <code>"answer"</code> are <strong>keys</strong>; the information beside each label is its <strong>value</strong>. Use square brackets and a key to look up a value: <code>questions[0]["answer"]</code> gives <code>"Tokyo"</code>. List positions start at 0, so <code>questions[1]["question"]</code> gives the second question.</p>
+<table><thead><tr><th>Term</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
+<tr><td>Variable</td><td>A name that refers to a value.</td><td><code>score = 0</code></td></tr>
+<tr><td>List</td><td>An ordered collection that can change.</td><td><code>questions = [q1, q2]</code></td></tr>
+<tr><td>Dictionary</td><td>Key/value pairs describing an item.</td><td><code>{"answer": "Tokyo"}</code></td></tr>
+<tr><td>Key / value</td><td>A dictionary label / the information stored under it.</td><td><code>"answer"</code> / <code>"Tokyo"</code></td></tr>
+<tr><td>Tuple</td><td>An ordered collection not meant to change.</td><td><code>options = ("A", "B", "C")</code></td></tr>
+</tbody></table>
+<p>Every question needs the same three keys: <code>"question"</code>, <code>"answer"</code>, and <code>"category"</code>. A missing or misspelled key causes an error when the program tries to use it.</p>
+
+<h2>2. Functions: Give One Job a Name</h2>
+<p>A <strong>function</strong> is a named, reusable block of code. A <strong>parameter</strong> is information the function receives. A <strong>return value</strong> is the result sent back to the code that called the function.</p>
+<p>This small function answers a yes/no check. Calling it with different values reuses the same instructions:</p>
+<pre>def is_ready(answer):
+  return answer.strip().lower() == "yes"
+
+first_check = is_ready(" YES ")  # True
+second_check = is_ready("not yet")  # False</pre>
+<p>Here, <code>answer</code> is a parameter. <code>return</code> sends the comparison result back to the caller. A second useful pattern is to give a function a dictionary and have it display that record:</p>
+<pre>def show_question(question):
+  print(f"[{question['category']}] {question['question']}")
+
+show_question(questions[0])
+show_question(questions[1])</pre>
+<p>The same function can display either question because the dictionary is passed in as the parameter. In your game, <code>ask_question(question)</code> should ask one question and return <code>True</code> for a correct answer or <code>False</code> otherwise; <code>main()</code> can use that result to decide whether to add a point.</p>
+
+<h2>3. Text Input: Normalize Before Comparing</h2>
+<p><code>input()</code> gives your program text. Clean both sides of a comparison so capitalization and extra spaces do not matter. The examples below show different typed answers being normalized to the same stored answer:</p>
+<ul><li><code>.strip()</code> removes spaces at the beginning and end.</li><li><code>.lower()</code> changes letters to lowercase.</li><li><code>.title()</code> changes words to title case; useful for display, but usually unnecessary for answer comparison.</li></ul>
+<pre>correct_answer = "Tokyo"
+
+typed_first = "  ToKyO "
+typed_second = "tokyo"
+
+print(typed_first.strip().lower() == correct_answer.strip().lower())  # True
+print(typed_second.strip().lower() == correct_answer.strip().lower())  # True</pre>
+<p>For the Mars question, the same comparison pattern also accepts <code>" MARS "</code> when the stored answer is <code>"Mars"</code>. Clean both the player's answer and the stored answer when comparing. Keep the question-bank data unchanged.</p>
+
+<h2>4. Input Errors: Blank Text Is Not an Exception</h2>
+<p>An <strong>exception</strong> is an error condition Python raises while a program runs. <code>try</code> runs code that might raise an exception; <code>except</code> handles a particular exception so the program can respond instead of stopping abruptly.</p>
+<div class="callout"><strong>Important:</strong> pressing Enter without typing returns an empty string. That is valid input, not an exception, so check it with <code>if</code>. If the input stream closes, <code>input()</code> raises <code>EOFError</code>, which can be handled with <code>try</code>/<code>except</code>.</div>
+<p>Example 1: pressing Enter produces blank text. An <code>if</code> check handles that ordinary input:</p>
+<pre>answer = input("Your answer: ")
+if answer.strip() == "":
+  print("Please enter an answer next time. This one is incorrect.")</pre>
+<p>Example 2: if input reaches end-of-file, handle the specific <code>EOFError</code>. After that, the blank check can still handle the empty answer consistently:</p>
+<pre>try:
+  answer = input("Your answer: ")
+except EOFError:
+  print("No input received. This answer will count as incorrect.")
+  answer = ""
+
+if answer.strip() == "":
+  print("A blank answer will count as incorrect.")</pre>
+<p>On Windows, end-of-file in a terminal is usually Ctrl+Z followed by Enter; on macOS or Linux, it is usually Ctrl+D. For this game, an unanswered question should not earn a point. Avoid a bare <code>except:</code>; catch the specific error you expect.</p>
+
+<h2>5. Loops and Score</h2>
+<p>A <strong>loop</strong> repeats code. A <code>for</code> loop can do something once for each item in a collection:</p>
+<pre>for item in questions:
+    print(item["question"])</pre>
+<p>A <strong>running total</strong> is a variable updated as the program goes. Start the score at zero; add one only when the answer is correct. The built-in <code>len()</code> function tells you how many questions are in the list.</p>
+<pre>score = 0
+score = score + 1  # award one point</pre>
+<p>An <strong>f-string</strong> inserts values into text. Put <code>f</code> before the quote and variable names inside braces:</p>
+<pre>player = "Sam"
+score = 3
+print(f"{player}, your score is {score}.")</pre>
+
+<h2>Build It in Small Steps</h2>
+<h3>TODO 1: Create the Question Bank</h3>
+<ul><li>Make <code>QUESTIONS</code> a list containing at least five dictionaries.</li><li>Give every dictionary the three required keys.</li><li>Choose questions with clear, checkable answers. Keep stored answers concise so matching is fair.</li><li>Use AI for ideas or structured data, then verify every fact yourself.</li></ul>
+<h3>TODOs 2–3: Ask and Check One Question</h3>
+<ul><li>Notice how the starter displays the category and question.</li><li>Get the player's answer with <code>input()</code>.</li><li>Compare cleaned, lowercase versions of the typed and stored answers.</li><li>Return a Boolean: <code>True</code> for a match, <code>False</code> otherwise.</li><li>Test a correct answer with different capitalization and extra spaces, then test a wrong answer.</li></ul>
+<h3>TODO 4: Handle Missing Input</h3>
+<ul><li>Check whether the answer is blank after stripping whitespace.</li><li>Use <code>try</code>/<code>except</code> for a real input exception such as <code>EOFError</code>.</li><li>Print a friendly message and make sure an unanswered question earns no point.</li></ul>
+<h3>TODO 5: Play the Full Game</h3>
+<ul><li>Loop through <code>QUESTIONS</code> with a <code>for</code> loop.</li><li>Call <code>ask_question()</code> once per question.</li><li>Print feedback and increase the score only for a correct answer.</li><li>Print points earned out of questions asked using an f-string.</li></ul>
+<p><strong>Work independently:</strong> make one small change, save, and run the program. Get one question working before testing the whole question bank.</p>
+
+<h2>Use AI as a Learning Partner</h2>
+<p>AI can make factual mistakes and can produce Python that looks convincing but does not run. You are responsible for checking the questions and understanding the code you submit.</p>
+<ol><li>Ask for one specific kind of help.</li><li>Inspect the response: does it have the requested structure, and are its facts correct?</li><li>Add or adapt a small part yourself.</li><li>Run your program and test it.</li><li>If it fails, share the exact error and ask for an explanation before requesting a fix.</li></ol>
+<h3>Prompt for Question Content</h3>
+<pre>Suggest five beginner-friendly trivia questions about [topic]. Return only valid Python data: a list of dictionaries, each with the keys "question", "answer", and "category". Keep answers short. After the data, list reliable sources I can use to verify the answers.</pre>
+<p>Check that the response is valid Python data before using it. Independently verify every answer with a trustworthy source; an AI-generated source list is not proof that an answer is correct.</p>
+<h3>Prompts for Learning and Debugging</h3>
+<pre>I am learning Python functions and loops. Explain what this code does one step at a time. Do not rewrite it yet. Here is my code: [paste a small section].</pre>
+<pre>This input behaves differently than I expected. Explain the error in beginner-friendly language and give me one hint for fixing it. Here is the exact error and the small relevant code section: [paste them].</pre>
+<pre>Review this try/except block for input edge cases. Explain which cases are exceptions and which need an if check. Do not write the whole game for me.</pre>
+<p>Do not share passwords, private information, or anything you should not share with an AI tool. Follow your instructor's rules about which tools you may use.</p>
+
+<h2>Test Before You Finish</h2>
+<ul><li>The question bank has at least five entries, and each has all three required keys.</li><li>The game asks every question in the list.</li><li>A correct answer earns one point; a wrong answer earns none.</li><li>Capitalization and extra spaces do not make a correct answer wrong.</li><li>A blank answer is handled politely and earns no point.</li><li>The final score is correct and includes the number of questions.</li><li>You can explain what your function returns and how the loop updates the score.</li></ul>
+<p>If something goes wrong, read the full error message from the bottom upward. Check spelling, quotation marks, parentheses, indentation, and dictionary keys. Test one question or input case at a time.</p>
+
+<h2>Stretch Goals</h2>
+<ul><li>Store fixed multiple-choice options as a tuple, for example <code>options = ("A", "B", "C")</code>.</li><li>Let the player choose a category and play only matching questions. A <strong>filter</strong> selects items that meet a condition.</li><li>Use <code>datetime.now()</code> to timestamp the score. <code>datetime</code> is Python's standard module for dates and times; the starter already imports it.</li></ul>
+
+<h2>Quick Vocabulary Review</h2>
+<table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Function</td><td>Reusable code that can accept parameters and return a result.</td></tr>
+<tr><td>Parameter / return value</td><td>Information passed into a function / result sent back to its caller.</td></tr>
+<tr><td>List / dictionary / tuple</td><td>Ordered changeable collection / key-value collection / ordered unchangeable collection.</td></tr>
+<tr><td>Boolean</td><td>One of two values: <code>True</code> or <code>False</code>.</td></tr>
+<tr><td>Exception</td><td>A runtime error condition Python raises.</td></tr>
+<tr><td>String method</td><td>An operation on text, such as <code>.strip()</code> or <code>.lower()</code>.</td></tr>
+<tr><td>f-string</td><td>A string that can include values inside braces, such as <code>f"Score: {score}"</code>.</td></tr>
+<tr><td><code>datetime</code></td><td>Python's standard module for dates and times.</td></tr>
+</tbody></table>
+</body>
+</html>

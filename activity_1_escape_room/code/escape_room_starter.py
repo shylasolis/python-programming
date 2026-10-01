@@ -81,6 +81,7 @@ def main():
         elif current_room == "escaped":
             print("\nYou escaped! Congratulations!")
             playing = False
+            
         elif current_room == "quit":
             print("\nMaybe next time!")
             playing = False
