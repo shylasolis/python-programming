@@ -2,8 +2,8 @@
 """
 Activity 3: RPG Character Forge (STARTER)
 
-Week 6: TODOs 1-4 (the Character class)
-Week 7: TODOs 5-6 (save/load)
+TODOs 1-4 (the Character class)
+TODOs 5-6 (save/load)
 
 Run the file often to test as you go:
     python code/character_forge_starter.py

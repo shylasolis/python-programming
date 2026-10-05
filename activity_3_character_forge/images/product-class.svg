@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="590" viewBox="0 0 960 590" role="img" aria-labelledby="title desc">
+  <title id="title">Product class diagram</title>
+  <desc id="desc">An original class diagram for Product, with code, description, and price attributes and three methods for retrieving them.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffaf7"/>
+      <stop offset="1" stop-color="#f5f2ef"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0f0f0f"/>
+      <stop offset="1" stop-color="#39312d"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#0f0f0f" flood-opacity=".14"/>
+    </filter>
+  </defs>
+  <rect width="960" height="590" rx="32" fill="url(#bg)"/>
+  <circle cx="120" cy="110" r="54" fill="#ff671d" opacity=".12"/>
+  <circle cx="846" cy="480" r="78" fill="#ff671d" opacity=".1"/>
+  <text x="480" y="76" text-anchor="middle" fill="#0f0f0f" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="700" letter-spacing="2">A CLASS DESCRIBES DATA AND ACTIONS</text>
+  <g filter="url(#shadow)">
+    <rect x="205" y="116" width="550" height="420" rx="22" fill="#fff"/>
+    <path d="M227 116h506a22 22 0 0 1 22 22v77H205v-77a22 22 0 0 1 22-22z" fill="url(#header)"/>
+    <text x="480" y="174" text-anchor="middle" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">Product</text>
+    <text x="254" y="247" fill="#a33c08" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1.5">ATTRIBUTES · STORED INFORMATION</text>
+    <g font-family="Cascadia Code, Consolas, monospace" font-size="23" fill="#0f0f0f">
+      <text x="270" y="293">code: str</text>
+      <text x="270" y="333">description: str</text>
+      <text x="270" y="373">price: float</text>
+    </g>
+    <line x1="245" y1="397" x2="715" y2="397" stroke="#f3d3c2" stroke-width="2"/>
+    <text x="254" y="430" fill="#a33c08" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1.5">METHODS · AVAILABLE ACTIONS</text>
+    <g font-family="Cascadia Code, Consolas, monospace" font-size="21" fill="#0f0f0f">
+      <text x="270" y="470">get_code()</text>
+      <text x="270" y="505">get_description()</text>
+      <text x="520" y="470">get_price()</text>
+    </g>
+  </g>
+  <text x="480" y="565" text-anchor="middle" fill="#59534f" font-family="Segoe UI, Arial, sans-serif" font-size="16">One class definition · three example methods</text>
+</svg>
