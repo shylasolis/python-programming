@@ -25,6 +25,8 @@ The project shows why objects are useful: a character keeps its data and behavio
 
 - `code/character_forge_starter.py`: your starting point
 - `code/product_class_demo.py`: an original Product class example for reading alongside the textbook
+- `code/movie_list_homework_starter.py`: student starter for Weekly Homework 03
+- `code/movie_list_homework_solution.py`: instructor reference solution (excluded from the public repository)
 - `student_guide.md`: detailed activity instructions
 - `student_guide.pdf`: printable copy of the student guide
 - `README_instructor.md`: instructor facilitation guide
