@@ -27,3 +27,4 @@ Your goal is to understand and write the game logic yourself. AI can help explai
 - `code/escape_room_starter.py`: your starting point
 - `student_guide.md`: detailed activity instructions
 - `README_instructor.md`: instructor facilitation guide
+- `homework/`: supplemental starter programs for the Chapter 3 exercises assigned with this activity
