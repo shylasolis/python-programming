@@ -1,29 +1,90 @@
 # Activity 4: Party Roster Manager
 
-Over two sessions, turn RPG character data into a SQLite database, then build a Tkinter interface that lets people manage the roster.
+Build a roster manager across two class sessions. In Week 8, store RPG characters in SQLite from a
+console menu. In Week 9, add a Tkinter interface that uses the same database.
 
-## Textbook Connection
+## Skills practiced
 
-This activity applies *Murach's Python Programming*, Section 4:
+- **Relational data and SQL:** define a table and add, list, and delete records. In this project,
+  each character is a row with an automatically assigned ID.
+- **Safe database access:** use parameterized queries for values supplied by a user, and explain why
+  SQL values should not be assembled with string formatting.
+- **Event-driven interfaces:** arrange Tkinter widgets and connect button callbacks to database
+  operations. Be able to trace an entry from the form to the database and back to the roster.
+- **Input validation and testing:** reject missing text and invalid or nonpositive numeric values
+  without adding a row or crashing the application.
 
-- Part A, Database Programming: create a SQLite table and use `INSERT`, `SELECT`, and `DELETE` queries.
-- Parameterized queries use `?` placeholders to keep user input separate from SQL commands.
-- Part B, GUI Programming: use Tkinter widgets, layouts, and callbacks to build a graphical interface.
+## Textbook connection
 
-This project extends Activity 3. A text file can save one character, but a database makes it practical to store, search, and manage many characters. The GUI then provides a more approachable way to use the database.
+This activity applies *Murach's Python Programming*, Section 4: Chapter 17, “How to work with a
+database,” for SQLite operations, followed by Chapter 18, “How to build a GUI program,” for Tkinter
+widgets, layout, and event callbacks.
 
-## Get Started
+## Textbook homework
 
-1. For the database session, open `code/roster_db_starter.py` and run `python code/roster_db_starter.py`.
-2. For the GUI session, open `code/roster_gui_starter.py` and run `python code/roster_gui_starter.py`.
-3. Complete the `# TODO` comments in order.
-4. Use [student_guide.md](student_guide.md) for the activity instructions.
+Homework is separate from the in-class Party Roster lab and uses the assigned textbook exercises,
+not extensions to the RPG project:
 
-`sqlite3` and Tkinter are included with standard Python installations. Always use parameterized SQL queries; do not place user input directly inside a SQL f-string.
+- [Chapter 17 homework: Exercise 17-2 (PDF)](homework/Weekly_Homework_04_Chapter_17.pdf)
+- [Chapter 18 homework: Exercise 18-2 (PDF)](homework/Weekly_Homework_05_Chapter_18.pdf)
+
+Each assignment has its own course-provided `.py` starting point. Submit completed homework and the
+required journal through Canvas; do not publish textbook homework solutions to Git. See the
+[homework submission expectations](../course_document_sources/Homework_Submission_Expectations.md)
+for the consistent course-wide instructions and rubric. Editable Markdown sources are in the
+`homework` folder beside the PDFs.
+
+## Requirements and setup
+
+- Python 3.10 or newer.
+- No third-party packages. The standard-library `sqlite3` and `tkinter` modules must be available.
+- Credit any outside code/data and meaningful AI assistance in your own project README.
+- Open a terminal in this folder (`activity_4_party_roster`), then run the applicable starter. Run
+  both sessions from this folder so they use the same `roster.db`:
+
+  ```text
+  python code/roster_db_starter.py
+  python code/roster_gui_starter.py
+  ```
+
+Complete the `# TODO` comments in order. See [student_guide.md](student_guide.md) for the session
+tasks, tests, and submission checklist.
+
+The program creates `roster.db` in the current working directory when it runs; no sample data file
+is required. Add sample characters through the program. Do not include a database containing
+personal or confidential information in a submission.
+
+## Example
+
+The Week 8 console menu includes:
+
+```text
+1) Add character
+2) List roster
+3) Delete character
+4) Quit
+```
+
+After adding a character, listing the roster shows its generated ID, name, class, level, and HP.
+The Week 9 window provides the corresponding form, roster, and delete action.
+
+## Known limitations
+
+The core application supports adding, listing, and deleting one character at a time. It does not
+include editing, searching, multiple-user access, or database backups. Document limitations of
+your own completed version accurately in its README and journal.
+
+## Credits
+
+This activity uses course-provided starter code. Credit any additional outside code or data and any
+meaningful AI assistance in your submitted project README.
 
 ## Files
 
-- `code/roster_db_starter.py`: SQLite console application
-- `code/roster_gui_starter.py`: Tkinter application
-- `student_guide.md`: detailed activity instructions
-- `README_instructor.md`: instructor facilitation guide
+- `code/roster_db_starter.py`: Week 8 SQLite console application
+- `code/roster_gui_starter.py`: Week 9 Tkinter application
+- `student_guide.md`: detailed activity and submission instructions
+- `student_guide.pdf`: printable copy of the student guide
+- `homework/`: textbook-only Chapter 17 and Chapter 18 assignments and their Python starters
+
+Use the starter files for your work. Do not submit or publish instructor-only reference solutions.

@@ -14,9 +14,9 @@ DB_FILE = "roster.db"
 def init_db(conn):
     """Create the characters table if it doesn't already exist."""
 
-    # TODO 1: Run a CREATE TABLE IF NOT EXISTS statement with columns:
-    # id (INTEGER PRIMARY KEY AUTOINCREMENT), name (TEXT), hp (INTEGER),
-    # level (INTEGER), char_class (TEXT). Then conn.commit().
+    # TODO 1: Run CREATE TABLE IF NOT EXISTS with an auto-generated integer id
+    # and required name (TEXT), hp (INTEGER), level (INTEGER), and
+    # char_class (TEXT) columns. Then conn.commit().
     pass
 
 
@@ -40,7 +40,8 @@ def delete_character(conn, character_id):
     """Delete a character row by id."""
 
     # TODO 4: Use a parameterized DELETE (with a ? placeholder for the id).
-    # Don't forget conn.commit().
+    # Commit, then return True if a row was deleted or False if the ID was
+    # not found.
     pass
 
 
@@ -57,11 +58,10 @@ def main():
     conn = sqlite3.connect(DB_FILE)
     init_db(conn)
 
-    # TODO 5: Finish this menu loop. It should:
-    # - print the menu options (add / list / delete / quit)
-    # - read the user's choice
-    # - call the matching function above
-    # - loop until the user chooses "quit"
+    # TODO 5: Finish this menu loop. Validate nonblank name/class and
+    # positive integer HP, level, and delete ID inputs. Handle non-integer
+    # values with a helpful message and return to the menu without crashing.
+    # Call the matching function and report when a delete ID is not found.
     print("=== Party Roster Manager (Database) ===")
     print("1) Add character")
     print("2) List roster")

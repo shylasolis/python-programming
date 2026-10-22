@@ -9,7 +9,7 @@ focus on the GUI. Follow the numbered TODOs in order. Run the file often:
 
 import sqlite3
 import tkinter as tk
-from tkinter import ttk
+from tkinter import messagebox, ttk
 
 DB_FILE = "roster.db"
 
@@ -45,8 +45,9 @@ def list_characters(conn):
 
 
 def delete_character(conn, character_id):
-    conn.execute("DELETE FROM characters WHERE id = ?", (character_id,))
+    cursor = conn.execute("DELETE FROM characters WHERE id = ?", (character_id,))
     conn.commit()
+    return cursor.rowcount > 0
 
 
 # --- GUI layer (build this part) ---
@@ -79,20 +80,22 @@ class RosterApp:
         self.refresh_list()
 
     def on_add_click(self):
-        # TODO 2: Read self.name_entry / self.hp_entry / self.level_entry /
-        # self.class_entry values, call add_character(...), clear the
-        # entries (e.g. entry.delete(0, tk.END)), and call self.refresh_list().
+        # TODO 2: Read the four entries. Reject blank name/class fields and
+        # non-integer or nonpositive HP/level with messagebox.showerror.
+        # Otherwise call add_character(...), clear the entries (e.g.
+        # entry.delete(0, tk.END)), and call self.refresh_list().
         pass
 
     def refresh_list(self):
-        # TODO 3: Clear the Treeview (self.tree.delete(*self.tree.get_children()))
-        # then loop over list_characters(self.conn) and insert each row with
+        # TODO 3: Loop over self.tree.get_children() and delete each displayed
+        # row. Then loop over list_characters(self.conn) and add each row with
         # self.tree.insert("", tk.END, values=row).
         pass
 
     def on_delete_click(self):
-        # TODO 4: Get the selected Treeview item (self.tree.selection()),
-        # read its "id" value, call delete_character(...), then refresh_list().
+        # TODO 4: If nothing is selected, show an informational message.
+        # Otherwise get the selected Treeview item's id, call
+        # delete_character(...), then refresh_list().
         pass
 
 
